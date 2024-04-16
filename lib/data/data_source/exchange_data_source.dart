@@ -1,3 +1,5 @@
+import 'package:flutter_exchange/data/dto_mapper/exchange_mapper.dart';
+import 'package:flutter_exchange/data/model/conversion_rates.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../dto_mapper/exchange_dto.dart';
@@ -15,6 +17,8 @@ class ExchangeDataSource {
         await _client.get(url, headers: {'Content-Type': 'application/json'});
     if (response.statusCode == 200) {
       final json = jsonDecode(utf8.decode(response.bodyBytes));
+      // final uu = ExchangeDto.fromJson(json);
+      // print(uu.conversionRates);
       return ExchangeDto.fromJson(json);
     } else {
       throw Exception(
@@ -22,3 +26,8 @@ class ExchangeDataSource {
     }
   }
 }
+
+// void main() {
+//   final result = ExchangeDataSource().getExchangeResult('USD');
+//   print(result.)
+// }
