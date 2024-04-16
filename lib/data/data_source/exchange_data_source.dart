@@ -9,7 +9,7 @@ class ExchangeDataSource {
 
   ExchangeDataSource({http.Client? client}) : _client = client ?? http.Client();
 
-  Future<ExchangeDto?> getExchange(String baseCurrency) async {
+  Future<ExchangeDto?> getExchangeResult(String baseCurrency) async {
     final url = Uri.parse('$_baseUrl$_apiKey/latest/$baseCurrency');
     final response =
         await _client.get(url, headers: {'Content-Type': 'application/json'});
