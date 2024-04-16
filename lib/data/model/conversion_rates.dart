@@ -165,4 +165,11 @@ class ConversionRates with _$ConversionRates {
 
   factory ConversionRates.fromJson(Map<String, Object?> json) =>
       _$ConversionRatesFromJson(json);
+
+  factory ConversionRates.fromMap(Map<String, num> rates) {
+    return ConversionRates(
+      usd: rates['USD'] ?? 0,
+      eur: rates['EUR'] ?? 0,
+    );
+  }
 }
