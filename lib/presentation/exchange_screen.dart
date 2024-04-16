@@ -20,8 +20,8 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
     "USD",
     "EUR",
     "JPY",
-    "KRW"
-  ]; // Example currencies
+    "KRW",
+  ];
   ExchangeDataSource? _dataSource;
 
   @override
@@ -79,14 +79,11 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
 
   Widget _buildResultBox() {
     return Container(
-      // 패딩을 추가하여 내부 공간을 조금 더 확보합니다.
       padding: const EdgeInsets.symmetric(vertical: 8),
-      // 컨테이너의 최소 높이를 설정합니다.
       constraints: const BoxConstraints(minHeight: 50),
       child: InputDecorator(
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
-          // contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5), // 기존 패딩 설정은 주석 처리
         ),
         child: Text(
           _exchangeRateResult != null
@@ -140,15 +137,13 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 20), // Vertical space between the rows
+            const SizedBox(height: 20),
             Row(
               children: [
                 Expanded(
                   child: _buildResultBox(),
                 ),
-                const SizedBox(
-                    width:
-                        20), // Horizontal space between the result box and the second dropdown
+                const SizedBox(width: 20),
                 Expanded(
                   child:
                       _buildDropdown(_targetCurrency, _currencies, (newValue) {
