@@ -1,30 +1,24 @@
-import 'package:flutter_exchange/data/dto_mapper/exchange_dto.dart';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../dto_mapper/exchange_dto.dart';
 
-class SubwayDataSource {
+class ExchangeDataSource {
   final http.Client _client;
-  final _url = 'https://v6.exchangerate-api.com/v6/6d3ec6d392cc1520e22fc20f/latest/';
-  SubwayDataSource({http.Client? client}) : _client = client ?? http.Client();
+  final String _apiKey = '950db4fa7b791ca910476aef'; // API 키는 보안이 강화된 방식으로 관리
+  final _baseUrl = 'https://v6.exchangerate-api.com/v6/';
 
-  Future<ExchangeDto?> getExchange(String query) async {
-    ExchangeDto exchangeDto = ExchangeDto();
+  ExchangeDataSource({http.Client? client}) : _client = client ?? http.Client();
 
-    final response = await _client.get(Uri.parse('$_url/$query'));
-
+  Future<ExchangeDto?> getExchange(String baseCurrency) async {
+    final url = Uri.parse('$_baseUrl$_apiKey/latest/$baseCurrency');
+    final response =
+        await _client.get(url, headers: {'Content-Type': 'application/json'});
     if (response.statusCode == 200) {
-      Map<String, dynamic> json =
-      await jsonDecode(utf8.decode(response.bodyBytes));
-      final result = ExchangeDto.fromJson(json);
-      // Map<String, dynamic> conversionRates = json['conversion_rates'];
-      // final exchangeResult = result.conversionRates;
-      // print(exchangeResult);
-      return result;
+      final json = jsonDecode(utf8.decode(response.bodyBytes));
+      return ExchangeDto.fromJson(json);
+    } else {
+      throw Exception(
+          'Failed to load exchange rates with status code: ${response.statusCode}');
     }
   }
 }
-
-// void main() async {
-//   final result = await SubwayDataSource().getExchange('USD');
-//   print(result);
-// }

@@ -1,54 +1,57 @@
 class ExchangeDto {
-  String? result;
-  String? documentation;
-  String? termsOfUse;
-  num? timeLastUpdateUnix;
-  String? timeLastUpdateUtc;
-  num? timeNextUpdateUnix;
-  String? timeNextUpdateUtc;
-  String? baseCode;
-  ConversionRatesDto? conversionRates;
+  String result;
+  String documentation;
+  String termsOfUse;
+  int timeLastUpdateUnix;
+  String timeLastUpdateUtc;
+  int timeNextUpdateUnix;
+  String timeNextUpdateUtc;
+  String baseCode;
+  ConversionRatesDto conversionRates;
 
   ExchangeDto({
-    this.result,
-    this.documentation,
-    this.termsOfUse,
-    this.timeLastUpdateUnix,
-    this.timeLastUpdateUtc,
-    this.timeNextUpdateUnix,
-    this.timeNextUpdateUtc,
-    this.baseCode,
-    this.conversionRates,
+    required this.result,
+    required this.documentation,
+    required this.termsOfUse,
+    required this.timeLastUpdateUnix,
+    required this.timeLastUpdateUtc,
+    required this.timeNextUpdateUnix,
+    required this.timeNextUpdateUtc,
+    required this.baseCode,
+    required this.conversionRates,
   });
 
-  ExchangeDto.fromJson(dynamic json) {
-    result = json['result'];
-    documentation = json['documentation'];
-    termsOfUse = json['terms_of_use'];
-    timeLastUpdateUnix = json['time_last_update_unix'];
-    timeLastUpdateUtc = json['time_last_update_utc'];
-    timeNextUpdateUnix = json['time_next_update_unix'];
-    timeNextUpdateUtc = json['time_next_update_utc'];
-    baseCode = json['base_code'];
-    conversionRates = json['conversion_rates'] != null
-        ? ConversionRatesDto.fromJson(json['conversion_rates'])
-        : null;
+  factory ExchangeDto.fromJson(Map<String, dynamic> json) {
+    try {
+      return ExchangeDto(
+        result: json['result'] as String,
+        documentation: json['documentation'] as String,
+        termsOfUse: json['terms_of_use'] as String,
+        timeLastUpdateUnix: json['time_last_update_unix'] as int,
+        timeLastUpdateUtc: json['time_last_update_utc'] as String,
+        timeNextUpdateUnix: json['time_next_update_unix'] as int,
+        timeNextUpdateUtc: json['time_next_update_utc'] as String,
+        baseCode: json['base_code'] as String,
+        conversionRates: ConversionRatesDto.fromJson(
+            json['conversion_rates'] as Map<String, dynamic>),
+      );
+    } catch (e) {
+      throw FormatException('Error parsing data: $e');
+    }
   }
 
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['result'] = result;
-    map['documentation'] = documentation;
-    map['terms_of_use'] = termsOfUse;
-    map['time_last_update_unix'] = timeLastUpdateUnix;
-    map['time_last_update_utc'] = timeLastUpdateUtc;
-    map['time_next_update_unix'] = timeNextUpdateUnix;
-    map['time_next_update_utc'] = timeNextUpdateUtc;
-    map['base_code'] = baseCode;
-    if (conversionRates != null) {
-      map['conversion_rates'] = conversionRates?.toJson();
-    }
-    return map;
+    return {
+      'result': result,
+      'documentation': documentation,
+      'terms_of_use': termsOfUse,
+      'time_last_update_unix': timeLastUpdateUnix,
+      'time_last_update_utc': timeLastUpdateUtc,
+      'time_next_update_unix': timeNextUpdateUnix,
+      'time_next_update_utc': timeNextUpdateUtc,
+      'base_code': baseCode,
+      'conversion_rates': conversionRates.toJson(),
+    };
   }
 }
 
@@ -193,7 +196,7 @@ class ConversionRatesDto {
   num? tmt;
   num? tnd;
   num? top;
-  num? Try;
+  num? TRY;
   num? ttd;
   num? tvd;
   num? twd;
@@ -357,7 +360,7 @@ class ConversionRatesDto {
     this.tmt,
     this.tnd,
     this.top,
-    this.Try,
+    this.TRY,
     this.ttd,
     this.tvd,
     this.twd,
@@ -522,7 +525,7 @@ class ConversionRatesDto {
     tmt = json['TMT'];
     tnd = json['TND'];
     top = json['TOP'];
-    Try = json['TRY'];
+    TRY = json['TRY'];
     ttd = json['TTD'];
     tvd = json['TVD'];
     twd = json['TWD'];
@@ -545,7 +548,6 @@ class ConversionRatesDto {
     zmw = json['ZMW'];
     zwl = json['ZWL'];
   }
-
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -689,7 +691,7 @@ class ConversionRatesDto {
     map['TMT'] = tmt;
     map['TND'] = tnd;
     map['TOP'] = top;
-    map['TRY'] = Try;
+    map['TRY'] = TRY;
     map['TTD'] = ttd;
     map['TVD'] = tvd;
     map['TWD'] = twd;
