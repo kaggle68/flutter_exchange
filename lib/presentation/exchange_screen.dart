@@ -78,16 +78,22 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
   }
 
   Widget _buildResultBox() {
-    return InputDecorator(
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      ),
-      child: Text(
-        _exchangeRateResult != null
-            ? _exchangeRateResult!.toStringAsFixed(2)
-            : '결과가 결과',
-        style: TextStyle(fontSize: 16, color: Colors.black.withOpacity(0.7)),
+    return Container(
+      // 패딩을 추가하여 내부 공간을 조금 더 확보합니다.
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      // 컨테이너의 최소 높이를 설정합니다.
+      constraints: const BoxConstraints(minHeight: 50),
+      child: InputDecorator(
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+          // contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5), // 기존 패딩 설정은 주석 처리
+        ),
+        child: Text(
+          _exchangeRateResult != null
+              ? _exchangeRateResult!.toStringAsFixed(2)
+              : '결과가 결과',
+          style: TextStyle(fontSize: 16, color: Colors.black.withOpacity(0.7)),
+        ),
       ),
     );
   }
