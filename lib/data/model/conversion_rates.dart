@@ -5,7 +5,7 @@ part 'conversion_rates.freezed.dart';
 part 'conversion_rates.g.dart';
 
 @freezed
-class ConversionRates with _$ConversionRate {
+class ConversionRates with _$ConversionRates {
   const factory ConversionRates({
     @Default(0) num usd,
     @Default(0) num aed,
